@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../../assets/logo.svg'
 
 const Navbar = () => {
     return (
@@ -23,7 +25,9 @@ const Navbar = () => {
                         <li><a>Item 3</a></li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+                <Link to={'/'}> 
+                    <img className='btn btn-lg btn-ghost rounded-xl' src={logo}></img>
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
