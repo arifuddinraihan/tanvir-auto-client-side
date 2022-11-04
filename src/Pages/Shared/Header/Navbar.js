@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../../../assets/logo.svg'
+import { AuthContext } from '../../../context/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogout = () => {
+        logOut()
+            .then()
+            .catch()
+    }
 
     const menuItems = <>
         <li className='font-semibold'>
             <NavLink to='/'
-                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning'  : undefined}>
+                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning' : undefined}>
                 Home
-            </NavLink>
-        </li>
-        <li className='font-semibold'>
-            <NavLink to='/login'
-                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning'   : undefined}>
-                Login
             </NavLink>
         </li>
     </>
@@ -40,7 +42,20 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Get started</a>
+                <a className="btn btn-outline btn-warning mr-6 rounded-lg">Appointment</a>
+                <div className="w-10">
+                    {
+                        user ?
+                            <>
+                                <button onClick={handleLogout} className='btn btn-md btn-outline btn-accent'>Logout</button>
+                            </>
+                            :
+                            <>
+                                <NavLink to='/login' className={({isActive})=> isActive ? 'btn btn-md btn-outline btn-error' : undefined}>
+                                    <button>Login</button></NavLink>
+                            </>
+                    }
+                </div>
             </div>
         </div>
     );
