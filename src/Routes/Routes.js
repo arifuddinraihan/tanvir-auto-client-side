@@ -4,6 +4,7 @@ import Checkout from "../Pages/Checkout/Checkout";
 import Homepage from "../Pages/HomePage/Homepage";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
+import Orders from "../Pages/Orders/Orders";
 import ErrorPage from "../Pages/Shared/Error404/ErrorPage";
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
             {
                 path : '/register',
                 element : <Register></Register>
+            },
+            {
+                path : '/orders',
+                element : <Orders></Orders>
             },
             {
                 path : '/checkout/:id',
