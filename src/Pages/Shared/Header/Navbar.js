@@ -7,13 +7,13 @@ const Navbar = () => {
     const menuItems = <>
         <li className='font-semibold'>
             <NavLink to='/'
-                className={({ isActive }) => isActive ? 'btn btn-outline btn-accent'  : undefined}>
+                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning'  : undefined}>
                 Home
             </NavLink>
         </li>
         <li className='font-semibold'>
             <NavLink to='/login'
-                className={({ isActive }) => isActive ? 'btn btn-outline btn-accent'   : undefined}>
+                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning'   : undefined}>
                 Login
             </NavLink>
         </li>
