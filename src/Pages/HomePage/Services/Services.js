@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import ServiceCard from './ServiceCard';
 
 const Services = () => {
+    const [services, setServices] = useState([]);
+    useEffect(() => {
+        fetch('services.json')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setServices(data)
+            })
+    }, [])
+
     return (
-        <div className="card card-compact w-96 bg-base-100 shadow-xl">
-            <figure><img src="https://placeimg.com/400/225/arch" alt="Shoes" /></figure>
-            <div className="card-body">
-                <h2 className="card-title">Shoes!</h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
-                <div className="card-actions justify-end">
-                    <button className="btn btn-primary">Buy Now</button>
+        <div>
+            <div className='text-center mb-4'>
+                <p className="text-2xl font-bold text-orange-600">Services</p>
+                <h2 className="text-5xl font-semibold">Our Service Area</h2>
+                <p>the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+            </div>
+            <div className='text-center py-6'>
+                <h2 className='font-semibold text-orange-600 py-5'>Total Services: {services.length}</h2>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                    {
+                        services.map(service => <ServiceCard 
+                            key={service._id}
+                            service={service}></ServiceCard>)
+                    }
                 </div>
             </div>
         </div>
