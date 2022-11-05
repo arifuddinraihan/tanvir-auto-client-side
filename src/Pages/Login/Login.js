@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import LoginImg from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../context/AuthProvider';
 
@@ -8,6 +8,10 @@ const Login = () => {
     const { user,
         setLoader,
         userLogin } = useContext(AuthContext)
+
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname
 
     const handleLogin = event => {
         event.preventDefault();
@@ -18,6 +22,7 @@ const Login = () => {
         .then( result => {
             const user = result.user;
             form.reset()
+            navigate(from , {replace : true})
         })
         .catch(err => console.error(err))
     }

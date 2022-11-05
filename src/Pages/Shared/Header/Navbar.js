@@ -43,16 +43,20 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 <a className="btn btn-outline btn-warning mr-6 rounded-lg">Appointment</a>
-                <div className="w-10">
+                <div className="">
                     {
                         user ?
                             <>
+                                <Link to={'/orders'}>
+                                    <button className='mr-2 btn btn-md btn-outline btn-accent'>Your Orders</button>
+                                </Link>
                                 <button onClick={handleLogout} className='btn btn-md btn-outline btn-accent'>Logout</button>
                             </>
                             :
                             <>
-                                <NavLink to='/login' className={({isActive})=> isActive ? 'btn btn-md btn-outline btn-error' : undefined}>
-                                    <button>Login</button></NavLink>
+                                <NavLink to='/login' className={({ isActive }) => isActive ? 'btn btn-md btn-outline btn-error' : undefined}>
+                                    <button>Login</button>
+                                </NavLink>
                             </>
                     }
                 </div>

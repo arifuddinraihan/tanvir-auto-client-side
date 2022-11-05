@@ -9,7 +9,7 @@ const Checkout = () => {
     const handlePlaceOrder = event => {
         event.preventDefault()
         const form = event.target;
-        const name = `${form.firstName?.value} ${form.lastName?.value}`;
+        const name = `${form.firstName.value} ${form.lastName.value}`;
         const email = user?.email || 'unregistered';
         const phone = form.phone.value;
         const message = form.message.value;
@@ -28,18 +28,19 @@ const Checkout = () => {
         console.log(order)
 
         fetch(`http://localhost:5000/orders`, {
-            method: "POST",
+            method: 'POST',
             headers: {
-                "content-type": "application/json"
+                'content-type': 'application/json'
             },
             body: JSON.stringify(order)
-        }).then(res => res.json())
+        })
+            .then(res => res.json())
             .then(data => {
+                console.log(data)
                 if (data.acknowledged) {
                     form.reset()
                     alert("Your order has been placed")
                 }
-                console.log(data)
             })
             .catch(err => console.error(err))
     }
@@ -59,9 +60,8 @@ const Checkout = () => {
                 <textarea name="message" className="textarea textarea-bordered h-24 w-full" placeholder="Your Message" required>
                 </textarea>
 
-                <Link to={'/orders'}>
-                    <input className='btn' type="submit" value="Place Your Order" />
-                </Link>
+                <input className='btn' type="submit" value="Place Your Order" />
+
             </form>
         </div>
 
