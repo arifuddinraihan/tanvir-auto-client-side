@@ -19,10 +19,16 @@ const Navbar = () => {
                 Home
             </NavLink>
         </li>
+        <li className='font-semibold'>
+            <NavLink to='/services'
+                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning' : undefined}>
+                Services
+            </NavLink>
+        </li>
     </>
 
     return (
-        <div className="navbar bg-transparent mb-4">
+        <div className="navbar bg-transparent">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
