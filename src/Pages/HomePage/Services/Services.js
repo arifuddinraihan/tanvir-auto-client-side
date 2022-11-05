@@ -6,19 +6,19 @@ const Services = () => {
     const [allServices, setAllServices] = useState([]);
     const [count, setCount] = useState(0);
     const [page, setPage] = useState(0);
-    const [size, setSize] = useState(2);
-
-    const pages = Math.ceil(count / size)
+    const [size, setSize] = useState(3);
 
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch(`http://localhost:5000/services?page=${page}&size=${size}`)
             .then(res => res.json())
             .then(data => {
                 const { count, services } = data
                 setCount(count)
                 setAllServices(services)
             })
-    }, [])
+    }, [page, size])
+
+    const pages = Math.ceil(count / size)
 
     return (
         <div className='flex flex-col items-center'>
@@ -37,7 +37,7 @@ const Services = () => {
                     }
                 </div>
             </div>
-            <div className='flex gap-8 my-4 mx-auto'>
+            <div className='flex gap-8 my-4 mx-auto items-center'>
                 <div>
                     <p>Selected Page : {page} & Size : {size}</p>
                     <div className="tabs bg-amber-300">
@@ -53,7 +53,7 @@ const Services = () => {
                 </div>
                 <div>
                     <select onChange={event => setSize(event.target.value)}
-                    className="select select-warning w-full max-w-xs">
+                        className="select select-warning w-full max-w-xs">
                         <option value="2" >2</option>
                         <option value="3" selected>3</option>
                         <option value="6" >6</option>
