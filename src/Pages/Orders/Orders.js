@@ -14,6 +14,25 @@ const Orders = () => {
                 setOrders(data)
             })
     }, [user?.email])
+    
+    const handleDelete = id => {
+        const proceed = window.confirm("Are you sure, deleting this order?")
+        if (proceed) {
+            console.log("Delete button working", id)
+            fetch(`http://localhost:5000/orders/${id}`, {
+                method: "DELETE"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.deletedCount > 0){
+                        alert("Delete Successfully")
+                        const remaining = orders.filter(odr => odr._id !== id)
+                        setOrders(remaining)
+                    }
+                })
+        }
+    }
 
     return (
         <div className='text-center'>
@@ -39,7 +58,8 @@ const Orders = () => {
                             orders.map(order => <OrderRow
                                 key={order._id}
                                 order={order}
-                            ></OrderRow>)
+                                handleDelete={handleDelete}
+                                ></OrderRow>)
                         }
                     </tbody>
                 </table>
