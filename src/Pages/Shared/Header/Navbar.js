@@ -12,20 +12,47 @@ const Navbar = () => {
             .catch()
     }
 
-    const menuItems = <>
-        <li className='font-semibold'>
-            <NavLink to='/'
-                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning' : undefined}>
-                Home
-            </NavLink>
-        </li>
-        <li className='font-semibold'>
-            <NavLink to='/services'
-                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning' : undefined}>
-                Services
-            </NavLink>
-        </li>
-    </>
+    const menuItems =
+        <>
+            {
+                user ?
+                    <>
+                        <li className='font-semibold'>
+                            <NavLink to='/'
+                                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning' : undefined}>
+                                Home
+                            </NavLink>
+                        </li>
+                        <li className='font-semibold'>
+                            <NavLink to='/services'
+                                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning' : undefined}>
+                                Services
+                            </NavLink>
+                        </li>
+                        <li className='font-semibold'>
+                            <NavLink to='/orders'
+                                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning' : undefined}>
+                                Your Orders
+                            </NavLink>
+                        </li>
+                    </>
+                    :
+                    <>
+                        <li className='font-semibold'>
+                            <NavLink to='/'
+                                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning' : undefined}>
+                                Home
+                            </NavLink>
+                        </li>
+                        <li className='font-semibold'>
+                            <NavLink to='/services'
+                                className={({ isActive }) => isActive ? 'btn btn-outline btn-warning' : undefined}>
+                                Services
+                            </NavLink>
+                        </li>
+                    </>
+            }
+        </>
 
     return (
         <div className="navbar bg-transparent">
@@ -59,7 +86,10 @@ const Navbar = () => {
                                 <button onClick={handleLogout} className='btn btn-md btn-outline btn-accent'>Logout</button>
                             </>
                             :
-                            <>
+                            <>  
+                                <Link to={'/orders'}>
+                                    <button className='mr-2 btn btn-md btn-outline btn-accent'>Your Orders</button>
+                                </Link>
                                 <NavLink to='/login' className={({ isActive }) => isActive ? 'btn btn-md btn-outline btn-error' : undefined}>
                                     <button>Login</button>
                                 </NavLink>

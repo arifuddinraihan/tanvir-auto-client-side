@@ -19,12 +19,33 @@ const Login = () => {
         const email = event.target.email.value;
         const password = event.target.password.value;
         userLogin(email, password)
-        .then( result => {
-            const user = result.user;
-            form.reset()
-            navigate(from , {replace : true})
-        })
-        .catch(err => console.error(err))
+            .then(result => {
+                const user = result.user;
+
+                const currentUser = {
+                    email: user.email
+                }
+
+                console.log(currentUser)
+
+                form.reset()
+                // JWT token receive
+                fetch('http://localhost:5000/jwt', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        localStorage.setItem('auto-token', data.token)
+                        navigate(from, { replace: true })
+                    })
+                    .catch(err => console.error(err))
+            })
+            .catch(err => console.error(err))
     }
 
     return (
@@ -40,13 +61,13 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input name="email" type="text" placeholder="email" className="input input-bordered" required/>
+                            <input name="email" type="text" placeholder="email" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input name="password" type="password" placeholder="password" className="input input-bordered" required/>
+                            <input name="password" type="password" placeholder="password" className="input input-bordered" required />
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
